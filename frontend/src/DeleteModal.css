@@ -1,0 +1,43 @@
+.deleteOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.deleteModal {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 420px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.deleteModal h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+
+.confirmClear {
+  width: 70%;
+  padding: 18px 0;
+  border: 2px solid rgba(55, 55, 55, 0.8);
+  border-radius: 12px;
+  background: rgb(226, 73, 73);
+  color: white;
+  font-size: 20px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.confirmClear:hover {
+  background: rgb(241, 117, 117);
+}

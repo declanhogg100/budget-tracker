@@ -1,0 +1,6 @@
+.pieChart{
+    position:absolute;
+    z-index: 2;
+    outline: none;
+    top:0%;
+}

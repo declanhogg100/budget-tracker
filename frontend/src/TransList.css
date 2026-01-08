@@ -1,0 +1,92 @@
+.transListWrapper {
+  flex: 0 0 clamp(15rem, 35vw, 30rem);
+  min-width: 0;
+  background: #fff;
+  border-radius: 2rem;
+  box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.transListHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 0.12rem solid #eee;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.transListHeader h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  margin: 0;
+}
+
+.transListHeader span {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: #777;
+}
+
+.transList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transEmpty {
+  color: #777;
+  font-size: 20px;
+}
+
+.transRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  background: #f9f9f9;
+}
+
+.transMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.transDesc {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  margin: 0;
+}
+
+.transDate {
+  color: #888;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+}
+
+.transAmount {
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
+  font-weight: 600;
+}
+
+.transActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.moveButton {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: rgba(86, 213, 255, 0.85);
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.moveButton:hover {
+  background: rgba(126, 223, 255, 0.95);
+}

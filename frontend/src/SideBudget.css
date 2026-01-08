@@ -1,0 +1,52 @@
+.sideBar {
+    overflow: auto;
+    position: absolute;
+    width:400px;
+    height: 650px;
+    background-color: rgb(255, 255, 255);
+    right:80px;
+    border-radius: 50px;
+    box-shadow: 0 0 60px 0 rgba(44, 44, 44, 0.152);
+
+}
+
+.categoryStats{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position:relative;
+    gap: 20px;
+}
+
+.leftSide{
+    display:flex;
+    gap: 8px;
+}
+
+.header1 {
+    font-family: Courier;
+    text-align: center;
+    font-weight: normal;
+    font-size: 40px;
+}
+
+.sideDivider{
+    width: 85%;
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(54, 54, 54, 0.579);
+    position:absolute;
+    top:0px;
+    right:30px;
+}
+
+.colorBox {
+    position: absolute;
+    border: 2px solid black;
+    background: var(--box-color);
+    width: 13px;
+    height: 13px;
+    top: 54px;
+    margin-left: px;
+}

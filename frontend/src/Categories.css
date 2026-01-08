@@ -1,0 +1,18 @@
+.categoriesPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.categoriesPanel {
+  width: calc(100vw - 400px);
+  max-width: 1100px;
+  height: 70vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 40px;
+  margin-left: 300px;
+}

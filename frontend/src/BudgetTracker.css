@@ -1,0 +1,126 @@
+.appDiv {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    outline: none;
+    padding: 0;
+}
+
+.budgetOutline {
+    width: min(30vw, 26rem);
+    height: min(30vw, 26rem);
+    border: 0.35rem dashed rgb(55, 55, 55);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.divider2 {
+    width: min(25vw, 22rem);
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: rgba(54, 54, 54, 0.579);
+    margin: -1.5rem auto 0;
+}
+
+.budgDisplay {
+    position: absolute;
+    top: 0vh;
+    text-align: center;
+    font-size: min(2.2rem, 3.8vw);
+}
+
+.topHeader{
+    margin-top: 1.5rem;
+    color: var(--budgetColor);
+    font-size: min(2.6rem, 4.2vw);
+}
+
+.budgetSetter,
+.csvSetter {
+    width: min(18rem, 22vw);
+    height: min(5rem, 6vh);
+    background: rgb(86, 213, 255);
+    position: absolute;
+    bottom: 120px;
+    color: white;
+    font-size: min(2rem, 3vw);
+    font-family: Georgia;
+    box-shadow: 0 0 60px 0 rgba(44, 44, 44, 0.161);
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.budgetSetter {
+    right: 52%;
+}
+
+.csvSetter {
+    left: 52%;
+}
+
+.budgetSetter:hover,
+.csvSetter:hover {
+    background: rgb(126, 223, 255);
+}
+
+.deleteButton {
+    width: min(14rem, 18vw);
+    height: min(4.5rem, 5vh);
+    background: rgb(218, 85, 85);
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: min(1.6rem, 2.4vw);
+    font-family: Georgia;
+    box-shadow: 0 0 3rem rgba(44, 44, 44, 0.16);
+    border-radius: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.deleteButton:hover {
+    background: rgb(241, 117, 117);
+}
+
+.loginAlerter{
+    position: fixed;
+    width: clamp(16rem, 30vw, 22rem);
+    height: clamp(7rem, 18vh, 10rem);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    background-color: rgba(73, 73, 73, 0.817);
+    z-index: 1001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-family: "Courier New", monospace;
+}
+
+.loginIconDiv {
+    position:absolute;
+    right:3.6%;
+    top:2%;
+    width: clamp(4rem, 6vw, 5.5rem);
+    height: clamp(4rem, 6vw, 5.5rem);
+}
