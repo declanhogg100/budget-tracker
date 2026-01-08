@@ -3,8 +3,10 @@
 A full‑stack budgeting app with a React/Vite frontend and Node/Express/Postgres backend. It supports JWT auth, CSV uploads for transactions, automatic categorization, budget tracking, and moving transactions between categories.
 
 ## Screenshots
-![Dashboard view](./screenshots/budgetScreenShot1)
-![Dashboard view](./screenshots/budgetScreenShot2)
+![Dashboard view](./screenshots/budgetScreenShot1.png)
+![Dashboard view](./screenshots/budgetScreenShot2.png)
+
+
 ## Prerequisites
 - Node.js (LTS) and npm
 - PostgreSQL running and accessible
