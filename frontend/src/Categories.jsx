@@ -45,6 +45,7 @@ function Categories({categories = [], transactions = [], dataNeedGrab, setDataNe
                     categories={categories}
                     activeId={activeCatId}
                     onSelect={setActiveCatId}
+                    setDataNeedGrab={setDataNeedGrab}
                 />
                 <TransList
                     category={activeCategory}

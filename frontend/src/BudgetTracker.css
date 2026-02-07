@@ -12,7 +12,7 @@
 .budgetOutline {
     width: min(30vw, 26rem);
     height: min(30vw, 26rem);
-    border: 0.35rem dashed rgb(55, 55, 55);
+    border: 6px solid var(--border);
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -20,49 +20,54 @@
     z-index: 1;
     position: absolute;
     top: 50%;
-    
     left: 50%;
     transform: translate(-50%,-50%);
+    box-shadow: inset 0 0 0 1px rgba(15,23,42,0.05);
+    background: var(--panel);
 }
 
 .divider2 {
     width: min(25vw, 22rem);
-    height: 0.5rem;
+    height: 0.35rem;
     border-radius: 9999px;
-    background: rgba(54, 54, 54, 0.579);
-    margin: -1.5rem auto 0;
+    background: var(--border);
+    margin: -1rem auto 0;
 }
 
 .budgDisplay {
     position: absolute;
-    top: 0vh;
+    top: 4vh;
     text-align: center;
-    font-size: min(2.2rem, 3.8vw);
+    font-size: min(2rem, 3.6vw);
+    color: var(--text);
 }
 
 .topHeader{
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     color: var(--budgetColor);
-    font-size: min(2.6rem, 4.2vw);
+    font-size: min(2.4rem, 4vw);
+    font-weight: 600;
 }
 
 .budgetSetter,
 .csvSetter {
     width: min(18rem, 22vw);
-    height: min(5rem, 6vh);
-    background: rgb(86, 213, 255);
+    height: min(4.6rem, 6vh);
+    background: var(--accent);
     position: absolute;
     bottom: 120px;
     color: white;
-    font-size: min(2rem, 3vw);
-    font-family: Georgia;
-    box-shadow: 0 0 60px 0 rgba(44, 44, 44, 0.161);
-    border-radius: 15px;
-    border: none;
+    font-size: min(1.4rem, 2.2vw);
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(47, 111, 237, 0.12);
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    letter-spacing: 0.01em;
+    transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .budgetSetter {
@@ -75,28 +80,32 @@
 
 .budgetSetter:hover,
 .csvSetter:hover {
-    background: rgb(126, 223, 255);
+    background: var(--accent-strong);
+    transform: translateY(-1px);
 }
 
 .deleteButton {
     width: min(14rem, 18vw);
-    height: min(4.5rem, 5vh);
-    background: rgb(218, 85, 85);
+    height: min(4.2rem, 5vh);
+    background: var(--danger);
     position: absolute;
     bottom: 5vh;
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: min(1.6rem, 2.4vw);
-    font-family: Georgia;
-    box-shadow: 0 0 3rem rgba(44, 44, 44, 0.16);
-    border-radius: 1rem;
-    border: none;
+    font-size: min(1.2rem, 2vw);
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(197, 59, 59, 0.15);
     cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .deleteButton:hover {
-    background: rgb(241, 117, 117);
+    background: var(--danger-strong);
+    transform: translateY(-1px);
 }
 
 .loginAlerter{
@@ -106,15 +115,17 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    color: white;
-    background-color: rgba(73, 73, 73, 0.817);
+    color: var(--text);
+    background-color: #ffffff;
+    border: 1px solid var(--border);
     z-index: 1001;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
-    font-family: "Courier New", monospace;
+    font-weight: 600;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-lg);
 }
 
 .loginIconDiv {
@@ -123,4 +134,12 @@
     top:2%;
     width: clamp(4rem, 6vw, 5.5rem);
     height: clamp(4rem, 6vw, 5.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
 }

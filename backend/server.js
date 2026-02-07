@@ -72,7 +72,7 @@ function parseAmount(value) {
 
 function verifyToken(req, res, next){
   const authTotal = req.headers.authorization;
-    if(!authTotal) return res.status(401).json({valid: false})
+    if(!authTotal) return res.status(401).json({valid: false, success:false, error:"Unauthorized"})
 
     const token = authTotal.split(" ")[1];
     try{
@@ -80,8 +80,23 @@ function verifyToken(req, res, next){
       req.userId = verified.id
       next();
     }catch{
-      res.status(401).json({valid:false});
+      res.status(401).json({valid:false, success:false, error:"Unauthorized"});
     }
+}
+
+async function ensureUncategorized(userId, client = pool){
+  const finder = await client.query(
+    "SELECT id FROM categories WHERE user_id=$1 AND LOWER(name) = LOWER($2)",
+    [userId, "Uncategorized"]
+  );
+  if (finder.rows.length > 0) return finder.rows[0].id;
+
+  const color = await getColor(userId, client);
+  const created = await client.query(
+    "INSERT INTO categories (user_id, name, color, total) VALUES ($1, $2, $3, $4) RETURNING id",
+    [userId, "Uncategorized", color, 0]
+  );
+  return created.rows[0].id;
 }
 
 async function getTotals(userId){
@@ -97,8 +112,8 @@ async function getTotals(userId){
   return results;
 }
 
-async function getColor(userId){
-  const usedColors = await pool.query(
+async function getColor(userId, client = pool){
+  const usedColors = await client.query(
     "SELECT color FROM categories WHERE user_id=$1",
     [userId]
   );
@@ -174,7 +189,7 @@ app.post("/upload", verifyToken, upload.single("file"), async(req, res) => {
           const userId = req.userId;
           
           for (const tx of results) {
-            const categoryName = autoCategorize(tx.description);
+            const categoryName = autoCategorize(tx.description).replace(/_/g, " ");
             tx.category = categoryName;
             let category = await pool.query(
               "SELECT id FROM categories WHERE user_id=$1 AND name=$2",
@@ -247,6 +262,92 @@ app.post("/budget", verifyToken, async(req,res) => {
   res.json({budget:newBudg});
   
 })
+
+app.post("/category", verifyToken, async (req, res) => {
+  const rawName = req.body.name ?? "";
+  const name = String(rawName).trim();
+  if (!name) {
+    return res.status(400).json({ success: false, error: "Category name required" });
+  }
+
+  try {
+    const dupe = await pool.query(
+      "SELECT id FROM categories WHERE user_id = $1 AND LOWER(name) = LOWER($2)",
+      [req.userId, name]
+    );
+    if (dupe.rows.length > 0) {
+      return res.status(409).json({ success: false, error: "Category already exists" });
+    }
+
+    const color = await getColor(req.userId);
+    const created = await pool.query(
+      "INSERT INTO categories (user_id, name, color, total) VALUES ($1, $2, $3, $4) RETURNING id, name AS category, total, color",
+      [req.userId, name, color, 0]
+    );
+    res.json({ success: true, category: created.rows[0] });
+  } catch (err) {
+    console.error("Create category failed", err);
+    res.status(500).json({ success: false, error: "Failed to create category" });
+  }
+});
+
+app.post("/category/delete", verifyToken, async (req, res) => {
+  const { categoryId } = req.body;
+  if (!categoryId) {
+    return res.status(400).json({ success: false, error: "categoryId required" });
+  }
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const cat = await client.query(
+      "SELECT id, name FROM categories WHERE user_id = $1 AND id = $2",
+      [req.userId, categoryId]
+    );
+    if (cat.rows.length === 0) {
+      await client.query("ROLLBACK");
+      return res.status(404).json({ success: false, error: "Category not found" });
+    }
+    if (cat.rows[0].name.toLowerCase() === "uncategorized") {
+      await client.query("ROLLBACK");
+      return res.status(400).json({ success: false, error: "Cannot delete Uncategorized" });
+    }
+
+    const uncategorizedId = await ensureUncategorized(req.userId, client);
+
+    const movedTotalRes = await client.query(
+      "SELECT COALESCE(SUM(amount), 0) AS sum FROM transactions WHERE user_id=$1 AND category_id=$2",
+      [req.userId, categoryId]
+    );
+    const movedTotal = Number(movedTotalRes.rows[0].sum || 0);
+
+    await client.query(
+      "UPDATE transactions SET category_id = $1 WHERE user_id = $2 AND category_id = $3",
+      [uncategorizedId, req.userId, categoryId]
+    );
+
+    if (movedTotal !== 0) {
+      await client.query(
+        "UPDATE categories SET total = total + $1 WHERE user_id=$2 AND id=$3",
+        [movedTotal, req.userId, uncategorizedId]
+      );
+    }
+
+    await client.query(
+      "DELETE FROM categories WHERE user_id = $1 AND id = $2",
+      [req.userId, categoryId]
+    );
+
+    await client.query("COMMIT");
+    res.json({ success: true, uncategorizedId });
+  } catch (err) {
+    await client.query("ROLLBACK");
+    console.error("Delete category failed", err);
+    res.status(500).json({ success: false, error: "Failed to delete category" });
+  } finally {
+    client.release();
+  }
+});
 
 app.get("/date", verifyToken, async(req,res)=>{
   const results = await pool.query("SELECT date FROM users WHERE id = $1",[req.userId]);

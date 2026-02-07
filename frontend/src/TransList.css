@@ -1,32 +1,41 @@
 .transListWrapper {
   flex: 0 0 clamp(15rem, 35vw, 30rem);
   min-width: 0;
-  background: #fff;
-  border-radius: 2rem;
-  box-shadow: 0 0 2.5rem rgba(0, 0, 0, 0.08);
-  padding: 2rem;
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   max-height: 100%;
+  border: 1px solid var(--border);
 }
 
 .transListHeader {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 0.12rem solid #eee;
-  padding-bottom: 0.8rem;
-  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.transListHeaderRight{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .transListHeader h2 {
   font-size: clamp(1.5rem, 2.5vw, 2.2rem);
   margin: 0;
+  color: var(--text);
+  font-weight: 700;
 }
 
 .transListHeader span {
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
-  color: #777;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  color: var(--muted);
 }
 
 .transList {
@@ -38,17 +47,18 @@
 }
 
 .transEmpty {
-  color: #777;
-  font-size: 20px;
+  color: var(--muted);
+  font-size: 18px;
 }
 
 .transRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.2rem;
-  border-radius: 1rem;
-  background: #f9f9f9;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  background: #f8fafc;
+  border: 1px solid var(--border);
 }
 
 .transMeta {
@@ -57,18 +67,21 @@
 }
 
 .transDesc {
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: clamp(0.98rem, 1.3vw, 1.15rem);
   margin: 0;
+  color: var(--text);
+  font-weight: 600;
 }
 
 .transDate {
-  color: #888;
+  color: var(--muted);
   font-size: clamp(0.8rem, 1vw, 0.95rem);
 }
 
 .transAmount {
-  font-size: clamp(1rem, 1.5vw, 1.4rem);
-  font-weight: 600;
+  font-size: clamp(1rem, 1.4vw, 1.3rem);
+  font-weight: 700;
+  color: var(--text);
 }
 
 .transActions {
@@ -80,13 +93,40 @@
 .moveButton {
   padding: 0.5rem 0.75rem;
   border: none;
-  border-radius: 0.6rem;
-  background: rgba(86, 213, 255, 0.85);
+  border-radius: var(--radius-md);
+  background: var(--accent);
   color: white;
   cursor: pointer;
   font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid rgba(47, 111, 237, 0.2);
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .moveButton:hover {
-  background: rgba(126, 223, 255, 0.95);
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+.deleteCatBtn{
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--danger);
+  color: white;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.15s ease, transform 0.15s ease;
+  font-weight: 600;
+  border: 1px solid rgba(197, 59, 59, 0.2);
+}
+
+.deleteCatBtn:hover:enabled{
+  background: var(--danger-strong);
+  transform: translateY(-1px);
+}
+
+.deleteCatBtn:disabled{
+  opacity: 0.7;
+  cursor: not-allowed;
 }

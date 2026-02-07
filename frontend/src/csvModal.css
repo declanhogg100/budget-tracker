@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,65 +12,66 @@
 }
 
 .uploadModal {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  background: var(--panel);
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
   text-align: center;
   width: 400px;
+  border: 1px solid var(--border);
 }
 
 .uploadButton {
-  background: rgb(86, 213, 255);
+  background: var(--accent);
   color: white;
-  border: none;
+  border: 1px solid rgba(47, 111, 237, 0.2);
   padding: 10px 25px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
   transition: 0.2s ease-in-out;
-  border: 2px solid rgba(55, 55, 55, 0.8);
 }
 
 .uploadButton:hover {
-  background: rgb(126, 223, 255);
+  background: var(--accent-strong);
 }
 
 .uploadMessage {
   margin-top: 20px;
   font-size: 14px;
+  color: var(--muted);
 }
 
 .duplicateMessage{
     font-weight: normal;
-    font-size:22px;
-    margin-top: -20px;
+    font-size:18px;
+    margin-top: -10px;
 }
 
 .customFileUpload {
-  background: rgb(86, 213, 255);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: 2px solid rgba(106, 106, 106, 0.735);
-  font-family: Georgia;
-  font-size: 20px;
+  background: #f8fafc;
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border);
+  font-size: 16px;
   cursor: pointer;
-  margin: 20px auto;
+  margin: 16px auto;
   transition: 0.2s ease-in-out;
   display: block;
+  font-weight: 600;
 }
-.customFileUpload:hover { background: rgb(126, 223, 255); transform: scale(1.03); }
+.customFileUpload:hover { background: #eef2f7; border-color: #cdd5e1; }
 
 .fileName {
   text-align: center;
   margin-top: -10px;
-  color: #444;
-  font-size: 20px;
-  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 16px;
+  margin-bottom: 16px;
   max-width: 90%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-

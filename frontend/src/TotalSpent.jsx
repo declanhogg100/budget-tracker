@@ -4,6 +4,8 @@ import "./TotalSpent.css"
 
 
 function TotalSpent( {budget,totalSpent, data} ){
+const maxRadius = 210;
+const safeRatio = Math.min(Math.max(totalSpent || 0, 0), 1);
 return(
     <>
     <PieChart width = {650} height = {550} className = "pieChart">
@@ -13,14 +15,7 @@ return(
         nameKey="category"
         cx="50%"
         cy="50%"
-        outerRadius={() => {
-            if(totalSpent>1){
-                return 249;
-            }
-            else{
-                return 249*totalSpent;
-            }
-        }}
+        outerRadius={maxRadius * safeRatio}
         >
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={entry.color} stroke = "rgba(33, 33, 33, 1)"
